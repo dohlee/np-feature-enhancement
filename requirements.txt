@@ -1,0 +1,9 @@
+matplotlib
+cleanlog
+networkx==1.10
+pandas
+numpy
+dohlee
+scikit-learn
+scipy
+numba
