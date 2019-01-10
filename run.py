@@ -39,6 +39,7 @@ def parse_argument():
     parser.add_argument('-s', '--seed', required=True, help='Seed list file.')
     parser.add_argument('-e', '--restart_prob', type=float, default=0.7,
                         help='Restart probability for random walk. (default 0.7)')
+    parser.add_argument('-w', '--weighted', action='store_true', default=False)
     parser.add_argument('-f', '--sf', type=float, default=20.0,
                         help='SF cutoff (default 20).')
     parser.add_argument('-x', '--iterations', type=int, default=1000,
@@ -143,7 +144,11 @@ if args.verbose:
     logger.setLevel(cleanlog.DEBUG)
 
 # Instantiate input network.
-network = nx.read_weighted_edgelist(args.network)
+if args.weighted:
+    network = nx.read_weighted_edgelist(args.network)
+else:
+    network = nx.read_edgelist(args.network)
+
 nodes = list(network.nodes())
 num_nodes = len(nodes)
 
