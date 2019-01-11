@@ -157,7 +157,9 @@ matrix = normalize(nx.to_numpy_matrix(network, dtype=np.float32), norm='l1', axi
 
 # Prepare seeds for foreground procedure.
 seed_list = [l.strip() for l in open(args.seed).readlines()]
-seed_indices = [nodes.index(s) for s in seed_list]
+
+node_set = set(nodes)
+seed_indices = [nodes.index(s) for s in seed_list if s in node_set]
 
 logger.debug('[Background procedure]')
 background_rank_means = background_procedure(network, num_nodes, args.sampled_seeds, args.iterations, args.restart_prob)
